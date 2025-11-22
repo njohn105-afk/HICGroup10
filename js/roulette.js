@@ -4,13 +4,14 @@
 // Lock input after locking in bet
 // Better styling
 // "Chip" placement on roulette numbers in selection menu
-// Physical number display and win/lose screen
 // Organize style sheet for roulette
-// Actual balance module for add/remove and update on site
 // Figure out how to rotate the ball CCW and still reach the correct number
 // ^^^ Maybe just flip the image offset?
 
 
+// DOING NOW:
+// Physical number display and win/lose screen
+// Actual balance module for add/remove and update on site
 
 
 const choiceTable = new Map();
@@ -20,6 +21,15 @@ const wheelOrder = [
     16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7,
     28, 12, 35, 3, 26
 ];
+const blackNumbers = [
+    26, 15, 4, 2, 17, 6, 13, 11, 8, 10, 24, 33, 20, 31,
+    22, 29, 28, 35, 26
+]
+
+const redNumbers = [
+    32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14,
+    9, 18, 7, 12, 3,
+]
 
 // To determine the correct rotation of any given number pocket on the roulette wheel
 // So we can move the ball toward that rotational value corresponding.
@@ -40,6 +50,8 @@ let startTime = 0;
 let ballAngle = 0;
 let initialBallAngle = 0;
 let ballRadius = outerRadius;
+
+let playerBalanceBeforeStart = 0;
 
 // Get initial angles of each pocket (number) on the roulette wheel
 const basePocketAngles = wheelOrder.map((_, i) => i * ANGLE_PER_SLOT);
@@ -111,7 +123,11 @@ function animateBall() {
 
 
 
-function startGame() {
+function attemptStartGame() {
+    if (!player.hasEnough(totalBet)) return;
+    playerBalanceBeforeStart = player.getBalance();
+    player.removeCurrency(totalBet);
+
     // Get ball element, reset angle settings
     const ball = document.getElementById("ball");
     initialBallAngle = 0;
@@ -134,9 +150,29 @@ function startGame() {
     requestAnimationFrame(animateBall);
 }
 
+function payout(winningNumber) {
+    // totalBet is already removed from player, so we just add now.
+    const amountBetSpecificNumber = choiceTable.get(winningNumber);
+    const amountBetBlack = choiceTable.get('black');
+    const amountBetRed   = choiceTable.get('red');
+    let profit = 0;
+    // Specific number payout: 36x
+    player.addCurrency(amountBetSpecificNumber * 36);
+    // Black/red payout: 2x
+    if (blackNumbers.includes(winningNumber)) player.addCurrency(amountBetBlack * 2);
+    else if (redNumbers.includes(winningNumber)) player.addCurrency(amountBetRed * 2);
+
+    profit = player.getBalance() - playerBalanceBeforeStart
+
+    console.log("Profit: " + profit);
+
+}
+
 function finishGame() {
     const winningNumber = wheelOrder[winningIndex];
     console.log("FINAL RESULT:", winningNumber);
+    payout(winningNumber);
+
 }
 
 function buildSelectorButton(div, text, className, id) {
@@ -155,13 +191,13 @@ function buildSelector() {
     if (choiceDiv) {
         for (let i = 0; i <= 36; i++) {
             let color;
-            if (i === 0) color = 'green';
-            else if (i % 2 === 0) color = 'red';
-            else color = 'black';
+            if (blackNumbers.includes(i)) color = 'black';
+            else if (redNumbers.includes(i)) color = 'red';
+            else color = 'green';
             buildSelectorButton(choiceDiv, i, 'roulette-button ' + color, i);
         }
-        buildSelectorButton(choiceDiv, "black", 'roulette-button black', "Black");
-        buildSelectorButton(choiceDiv, "red", 'roulette-button red', "Red");
+        buildSelectorButton(choiceDiv, "Black", 'roulette-button black', "black");
+        buildSelectorButton(choiceDiv, "Red", 'roulette-button red', "red");
     }
 }
 
@@ -174,6 +210,7 @@ function buildChoices() {
 }
 
 function addToChoice(choice, amount) {
+    if (totalBet + amount > player.getBalance()) return;
     choiceTable.set(choice, choiceTable.get(choice) + amount);
     totalBet += amount;
     const betAmountText = document.querySelector('#bet-amnt');
@@ -191,7 +228,7 @@ window.onload = function () {
     });
 
     document.getElementById("place-bet")
-        .addEventListener("click", startGame);
+        .addEventListener("click", attemptStartGame);
 
     document.getElementById("wheel").classList.add("idle-spin");
 };
