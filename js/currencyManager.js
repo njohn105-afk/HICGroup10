@@ -1,6 +1,7 @@
 // INCLUDE this script BEFORE any other scripts in each html file
 // This ensures that the player data is loaded and visuals updated
-
+// Do not create new player objects, always use the reference 'player' which is 
+// created at the bottom of this file.
 
 class Player {
     constructor() {

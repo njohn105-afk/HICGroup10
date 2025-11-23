@@ -155,6 +155,52 @@ body {
   border: 2px solid #b38cff;
 }
 
+.bet-container.disabled {
+    pointer-events: none;
+}
+
+.bet-container.disabled::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: inherit;
+
+    pointer-events: none;
+}
+
+#winning-text {
+    position: absolute;
+    top: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#profit-text {
+    position: absolute;
+    bottom: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.red-text {
+    color: #d1214b;
+}
+
+.green-text {
+    color: #1f8a4c;
+}
+
 .game-button
 {
   background-color: #b38cff;
@@ -170,7 +216,54 @@ body {
   box-shadow: 0 9px #999;
 }
 
+.game-button-new {
+    background-color: #6b3fa0; 
+    display: inline-block;
+    padding: 14px 15px;
+    font-size: 20px;
+    font-weight: 600;
+
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+
+    border: none;
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px #4e2b78, 
+        0 0 12px rgba(150, 80, 255, 0.25); 
+
+    transition: 
+        background 0.15s ease-out,
+        transform 0.12s ease-out,
+        box-shadow 0.12s ease-out;
+}
+.game-button-new:hover {
+    background-color: #7a4fbd;
+    box-shadow:
+        0 9px #4e2b78,
+        0 0 18px rgba(170, 100, 255, 0.35);
+}
+
+.game-button-new:active {
+    transform: translateY(4px);
+    box-shadow:
+        0 4px #3a1f5a,  /* compressed shadow */
+        0 0 8px rgba(120, 60, 220, 0.25);
+}
+
+.game-button-new.disabled {
+    opacity: 0.55;
+    filter: grayscale(30%);
+    cursor: not-allowed;
+    box-shadow: 0 8px #3e2760;
+}
+
 .roulette-button {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,12 +288,39 @@ body {
       0 0 12px rgba(140, 0, 255, 0.25);
 }
 
+.smaller-text {
+  font-size: 15px;
+}
+
+.bet-label {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 4px;
+
+    pointer-events: none;
+    white-space: nowrap;
+
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
 .red {
   background: linear-gradient(145deg, #d1214b, #b11636);
 }
 
 .black {
   background: linear-gradient(145deg, #333, #111);
+}
+
+.grey {
+  background: linear-gradient(145deg, #333, #585656)
 }
 
 .green {
@@ -234,36 +354,37 @@ body {
   display: grid;
   padding: 15px;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 3px;
 }
 
 
 #chip_cost {
-    width: 160px;
-    padding: 10px 12px;
+    width: 200px;
+    padding: 10px 14px;
     margin-top: 10px;
     margin-bottom: 20px;
 
-    background: rgba(30, 0, 60, 0.6);
-    border: 2px solid rgba(168, 94, 255, 0.4);
-    border-radius: 8px;
+    background: #2a2340;               /* subtle dark-purple panel */
+    border: 2px solid #4e2b78;        /* same tone as button shadow */
+    border-radius: 10px;
 
     color: #e8dfff;
     font-size: 16px;
 
     outline: none;
-    transition: all 0.25s ease;
+    transition: 0.2s ease;
 }
 
 #chip_cost:focus {
-    background: rgba(48, 0, 90, 0.75);
-    border-color: #b175ff;
-    box-shadow: 0 0 12px #a45bff;
+    border-color: #7a4fbd;             /* same hover color as button */
+    background: #342b52;               /* slightly brighter on focus */
+    box-shadow: 
+        0 0 10px rgba(150, 80, 255, 0.25);  /* subtle glow to match wheel */
 }
 
 #chip_cost::placeholder {
-    color: #b38aff;
-    opacity: 0.7;
+    color: #9a82c9;                    /* softer pastel purple */
+    opacity: 0.6;
 }
 
 .game-button:hover
@@ -285,9 +406,8 @@ body {
     height: 500px;
 
     border-radius: 50%;
-    box-shadow:
-        0 0 25px rgba(140, 0, 255, 0.35),
-        0 0 40px rgba(140, 0, 255, 0.15);
+    filter: drop-shadow(0 0 10px rgba(160, 94, 255, 0.45))
+            drop-shadow(0 0 10px rgba(160, 94, 255, 0.45));
 
     transform-origin: center center;
 
