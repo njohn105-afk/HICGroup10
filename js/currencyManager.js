@@ -18,6 +18,13 @@ class Player {
         this.balance = Number(localStorage.getItem("balance")) ?? 1000;
         this.gameHistory = this.getGameHistory() ?? [];
         this.updateBalanceBox();
+
+        //DEBUG: ADD CURRENCY WITH + BUTTON
+        const addButtons = document.querySelectorAll('.balance-add-btn');
+        addButtons.forEach(btn => {
+            btn.addEventListener("click", function() {player.addCurrency(1000)});
+        })
+
     }
 
     getBalance() {
