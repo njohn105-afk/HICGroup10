@@ -3,11 +3,20 @@
 // Do not create new player objects, always use the reference 'player' which is 
 // created at the bottom of this file.
 
+// History format:
+// Index 0 = most recent
+/*{
+    gameKey: gameKey, 
+    wagerAmt: wagerAmt, 
+    win: profitValue > 0,
+    profitValue: profitValue,
+    endBalance: this.getBalance(),
+}*/
+
 class Player {
     constructor() {
         this.balance = Number(localStorage.getItem("balance")) ?? 1000;
-        this.gameHistory = null;
-        // Can add more variables in the future (like history tracking)
+        this.gameHistory = this.getGameHistory() ?? [];
         this.updateBalanceBox();
     }
 
@@ -28,6 +37,42 @@ class Player {
     removeCurrency(amount) {
         if (this.hasEnough(amount)) this.addCurrency(-amount);
         else console.log("Attempted to remove too much balance!");
+    }
+
+    getGameHistory() {
+        const history = localStorage.getItem("history");
+        if (history) {
+            return JSON.parse(history);
+        }
+        return null;
+    }
+
+    addToGameHistory(gameKey, wagerAmt, profitValue) {
+        // List: 
+        // gameKey
+        // wager Amount
+        // Win/loss determined if profitValue > 0
+        // Result determined from profitValue
+        // Balance (just get user balance)
+
+        this.gameHistory.unshift(
+            {
+                gameKey: gameKey, 
+                wagerAmt: wagerAmt, 
+                win: profitValue > 0,
+                profitValue: profitValue,
+                endBalance: this.getBalance(),
+            }
+        )
+        if (this.gameHistory.length > 15) {
+            this.gameHistory.splice(15); 
+        }
+        this.saveGameHistory();
+
+    }
+
+    saveGameHistory() {
+        localStorage.setItem("history", JSON.stringify(this.gameHistory));
     }
 
     updateBalanceBox() {

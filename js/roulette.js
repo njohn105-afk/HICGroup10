@@ -223,6 +223,9 @@ function payout(winningNumber) {
     profit = player.getBalance() - playerBalanceBeforeStart
 
     showGameResults("Winning Number: " + winningNumber, "Profit: " + profit, profit);
+    if (totalBet > 0) {
+        player.addToGameHistory("roulette", totalBet, profit)
+    }
 
 }
 
