@@ -15,7 +15,7 @@
 
 class Player {
     constructor() {
-        this.balance = Number(localStorage.getItem("balance")) ?? 1000;
+        this.balance = Number(localStorage.getItem("balance") ?? 1000);
         this.gameHistory = this.getGameHistory() ?? [];
         this.updateBalanceBox();
 
