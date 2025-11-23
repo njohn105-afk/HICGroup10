@@ -223,6 +223,9 @@ function payout(winningNumber) {
     profit = player.getBalance() - playerBalanceBeforeStart
 
     showGameResults("Winning Number: " + winningNumber, "Profit: " + profit, profit);
+    if (totalBet > 0) {
+        player.addToGameHistory("roulette", totalBet, profit)
+    }
 
 }
 
@@ -233,7 +236,7 @@ function showGameResults(topText, botText, profitAmt) {
     clearGameResults();
     const winText = document.getElementById("winning-text");
     const profitText = document.getElementById("profit-text");
-    let multiplier = totalBet / totalBet + profitAmt;
+    let multiplier = (totalBet + profitAmt) / totalBet;
     if (profitAmt > 0) {
         profitText.classList.add("green-text");
         botText += " (" + multiplier + "x)"
