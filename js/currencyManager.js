@@ -64,8 +64,8 @@ class Player {
                 endBalance: this.getBalance(),
             }
         )
-        if (this.gameHistory.length > 15) {
-            this.gameHistory.splice(15); 
+        if (this.gameHistory.length > 12) {
+            this.gameHistory.splice(12); 
         }
         this.saveGameHistory();
 

@@ -219,7 +219,46 @@ body {
     padding: 20px;
 }
 
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0px;
 
+    background: #2f2f2f;
+    border: 1px solid #b38cff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.history-table thead {
+    background: #3a3a3a;
+}
+
+.history-table th {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.history-table td {
+    padding: 12px;
+    font-size: 15px;
+    color: #e5e5e5;
+}
+
+.history-table tr:nth-child(even) {
+    background: #262626;
+}
+
+.history-win {
+    color: #3bd16f;
+    font-weight: 600;
+}
+
+.history-loss {
+    color: #d14a4a;
+    font-weight: 600;
+}
 
 
 
