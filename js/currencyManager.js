@@ -6,6 +6,7 @@
 class Player {
     constructor() {
         this.balance = Number(localStorage.getItem("balance")) ?? 1000;
+        this.gameHistory = null;
         // Can add more variables in the future (like history tracking)
         this.updateBalanceBox();
     }
