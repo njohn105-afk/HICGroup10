@@ -1,6 +1,7 @@
 //TODO:
 // Organize style sheet for roulette
 // SNACKBAR UI BUILDER FOR USER INFORMATION DISPLAY
+// Fix awkward positioning of elements in history table
 
 const choiceTable = new Map();
 const wheelOrder = [
