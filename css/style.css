@@ -964,6 +964,20 @@ page {
   background: rgba(255, 75, 106, 0.14);
 }
 
+.mines-game-container {
+  margin-top: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-20%, -50%);
+  height: 700px;
+  width: 800px;
+  background-color: #313131;
+  border: 2px solid #b38cff;
+  display: flex;
+  justify-content: center;
+}
+
 .mines-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -971,6 +985,7 @@ page {
   padding: 20px;
   width: fit-content;
   margin: 24px auto;
+  padding-bottom: 80px;
 }
 
 .mine-cell {
@@ -1005,4 +1020,45 @@ page {
 .mine-cell.mine {
   background: linear-gradient(145deg,#d1214b,#a31536);
   color: #fff;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #313131;
+  border-top: 2px solid #b38cff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.current-winnings {
+  color: #e6d6ff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.claim-winnings-btn {
+  background-color: #b38cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px #999;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.claim-winnings-btn:hover {
+  background-color: #7c64ad;
+}
+
+.claim-winnings-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px #666;
 }

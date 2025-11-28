@@ -45,8 +45,12 @@
 
         <button class="game-button" id="place-bet">Lock-in Bet</button>
   </div>
-  <div class="game-container">
+  <div class="mines-game-container">
     <div id="mines-board" class="mines-grid"></div>
+    <div class="bottom-bar">
+      <span class="current-winnings">Current Winnings: <span id="current-winnings-amount">$0</span></span>
+      <button class="claim-winnings-btn" id="claim-winnings">Claim Winnings</button>
+    </div>
     <script src="./js/currencyManager.js"></script>
     <script src="./js/mines.js"></script>
   </div>
