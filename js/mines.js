@@ -83,6 +83,7 @@ function onCellClick(event) {
         toggleBetContainer(true);
         disableAllCells(true);
         player.addToGameHistory("mines", parseInt(betAmountField.value), -parseInt(betAmountField.value));
+        showModal("Boom!", `You lost it all! -$${parseInt(betAmountField.value)}`, false);
         resetWinnings();
     } else {
         // cell is safe
@@ -97,6 +98,7 @@ function claimWinnings() {
     if (currentWinnings > 0) {
         player.addCurrency(currentWinnings);
         player.addToGameHistory("mines", parseInt(betAmountField.value), currentWinnings);
+        showModal("Win!", `You claimed: $${currentWinnings}`, true);
         resetWinnings();
         disableAllCells(true);
         toggleBetContainer(true);
@@ -135,4 +137,24 @@ function disableAllCells(disabled) {
             cell.disabled = false;
         }
     });
+}
+
+function showModal(title, message, isWin) {
+    const modal = document.getElementById('result-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    const closeModal = document.getElementById('close-modal');
+
+    // Set modal content
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    modalTitle.className = `modal-title ${isWin ? 'green' : 'red'}`;
+
+    // Show modal
+    modal.classList.remove('hidden');
+
+    // Close modal on button click
+    closeModal.onclick = () => {
+        modal.classList.add('hidden');
+    };
 }
