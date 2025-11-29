@@ -47,11 +47,15 @@ function placeBet()
 {
     if (!document.getElementById("place-bet").classList.contains('disabled'))
         {
-            document.getElementById("raise").classList.add('disabled');
-            document.getElementById("lower").classList.add('disabled');
-            document.getElementById("place-bet").classList.add('disabled');
+            toggleBetContainer(false);
             allowGame();
         }
+}
+
+function toggleBetContainer(to) {
+    const container = document.querySelector('.bet-container');
+    if (to === false) container.classList.add("disabled");
+    else container.classList.remove("disabled");
 }
 
 function allowGame()
@@ -160,6 +164,8 @@ function stay() {
     document.getElementById("dealer-sum").innerText = dealerSum;
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("results").innerText = message;
+
+    toggleBetContainer(true);
 }
 
 function getValue(card) {
