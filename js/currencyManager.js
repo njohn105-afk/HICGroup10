@@ -85,7 +85,7 @@ class Player {
     updateBalanceBox() {
         const balance_boxes = document.querySelectorAll('#balance-amount');
         for (const balance_box of balance_boxes) {
-            balance_box.textContent = this.getBalance();
+            balance_box.textContent = this.getBalance().toFixed(2);
         }
     }
 }

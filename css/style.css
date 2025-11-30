@@ -540,6 +540,7 @@ body {
 
 
 
+
 @keyframes idleSpin {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
@@ -563,6 +564,15 @@ body {
     height: 100%;
     width: 100%;
     position: relative; 
+}
+
+/* COINFLIP STYLe */
+#coin {
+    width: 350px;
+    height: 350px;
+
+    transform-origin: center center;
+    transition: transform 0.25s ease-in-out;
 }
 
 
