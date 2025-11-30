@@ -1,5 +1,4 @@
 //TODO:
-// Organize style sheet for roulette
 // SNACKBAR UI BUILDER FOR USER INFORMATION DISPLAY
 // Fix awkward positioning of elements in history table
 
@@ -169,7 +168,6 @@ function attemptStartGame() {
 }
 function finishGame() {
     const winningNumber = wheelOrder[winningIndex];
-    console.log("FINAL RESULT:", winningNumber);
     payout(winningNumber);
     resetBet();
     toggleBetContainer(true);
@@ -185,7 +183,10 @@ function buildChoices() {
 }
 function addToChoice(choice, amount) {
     if (amount < 0) return;
-    if (totalBet + amount > player.getBalance()) return;
+    if (totalBet + amount > player.getBalance()) {
+        alert("Insufficient balance to place this bet!");
+        return; 
+    }
     choiceTable.set(choice, choiceTable.get(choice) + amount);
     totalBet += amount;
     updateTotalBetAmount();
