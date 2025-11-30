@@ -26,16 +26,16 @@ function loadHistory() {
             `<span class='history-loss'>Loss</span>`;
 
         const profit = entry.profitValue > 0 ?
-            `<span class='history-win'>+${entry.profitValue}</span>` :
-            `<span class='history-loss'>${entry.profitValue}</span>`;
+            `<span class='history-win'>+${entry.profitValue.toFixed(2)}</span>` :
+            `<span class='history-loss'>${entry.profitValue.toFixed(2)}</span>`;
 
         html += `
         <tr>
             <td>${entry.gameKey}</td>
-            <td>${entry.wagerAmt}</td>
+            <td>${entry.wagerAmt.toFixed(2)}</td>
             <td>${won}</td>
             <td>${profit}</td>
-            <td>${entry.endBalance}</td>
+            <td>${entry.endBalance.toFixed(2)}</td>
         </tr>
         `;
     });
