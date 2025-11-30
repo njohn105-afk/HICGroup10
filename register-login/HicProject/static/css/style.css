@@ -1,0 +1,127 @@
+/* Global dark background */
+.dark-bg {
+    background-color: #0b0b0f;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* AUTH CARD BOX */
+.auth-card {
+    background: linear-gradient(145deg, #1d1526, #0f0a16);
+    padding: 40px;
+    border-radius: 20px;
+    width: 380px;
+    box-shadow: 0 0 25px rgba(128, 0, 255, 0.3);
+    text-align: center;
+}
+
+/* Title */
+.auth-title {
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Inputs */
+.auth-input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #1f1a28;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
+
+/* Button */
+.auth-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    background-color: #7a49ff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background-color: #6a3de0;
+}
+
+/* Bottom link */
+.auth-link {
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.auth-link a {
+    color: #b794ff;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+/* PROFILE CARD */
+.profile-card {
+    background: linear-gradient(145deg, #1d1526, #0f0a16);
+    padding: 40px;
+    border-radius: 20px;
+    width: 420px;
+    box-shadow: 0 0 25px rgba(128, 0, 255, 0.3);
+    text-align: center;
+    color: white;
+}
+
+/* PROFILE INFO SECTION */
+.profile-info {
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: #ff4f7b;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #e03a65;
+}
+.messages {
+    margin-bottom: 15px;
+}
+
+.message {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.message.success {
+    background-color: #2ecc71;
+    color: #0d2f1d;
+}
+
+.message.error {
+    background-color: #ff6b6b;
+    color: #3d0c0c;
+}

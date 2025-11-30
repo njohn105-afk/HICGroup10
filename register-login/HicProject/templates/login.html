@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark-bg">
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="auth-card">
+        <h2 class="auth-title">Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <input class="auth-input" type="text" name="username" placeholder="Username" required>
+            <input class="auth-input" type="password" name="password" placeholder="Password" required>
+
+            <button class="auth-button" type="submit">Login</button>
+        </form>
+
+        <!-- REGISTER LINK -->
+        <p class="auth-link">
+            Create an account? <a href="/register/">Register</a>
+        </p>
+
+        <!-- FORGOT LINKS BELOW REGISTER -->
+        <p class="auth-link">
+            <a href="/reset-password/">Forgot password?</a><br>
+            <a href="/forgot-username/">Forgot username?</a>
+        </p>
+    </div>
+
+</body>
+</html>
