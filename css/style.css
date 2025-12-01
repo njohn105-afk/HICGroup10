@@ -1055,24 +1055,49 @@ page {
 }
 
 .claim-winnings-btn {
-  background-color: #b38cff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px #999;
-  transition: background-color 0.2s, transform 0.2s;
-}
+    background-color: #6b3fa0; 
+    display: inline-block;
+    padding: 14px 15px;
+    font-size: 20px;
+    font-weight: 600;
 
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+
+    border: none;
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px #4e2b78, 
+        0 0 12px rgba(150, 80, 255, 0.25); 
+
+    transition: 
+        background 0.15s ease-out,
+        transform 0.12s ease-out,
+        box-shadow 0.12s ease-out;
+}
 .claim-winnings-btn:hover {
-  background-color: #7c64ad;
+    background-color: #7a4fbd;
+    box-shadow:
+        0 9px #4e2b78,
+        0 0 18px rgba(170, 100, 255, 0.35);
 }
 
 .claim-winnings-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px #666;
+    transform: translateY(4px);
+    box-shadow:
+        0 4px #3a1f5a,  /* compressed shadow */
+        0 0 8px rgba(120, 60, 220, 0.25);
+}
+
+.claim-winnings-btn.disabled {
+    opacity: 0.55;
+    filter: grayscale(30%);
+    cursor: not-allowed;
+    box-shadow: 0 8px #3e2760;
 }
 
 /* Modal Styles */

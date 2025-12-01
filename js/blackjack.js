@@ -14,7 +14,7 @@ window.onload = function() {
     buildDeck();
     shuffleDeck();
     adjustBet();
-    startGame();
+    
 }
 
 function adjustBet()
@@ -47,8 +47,20 @@ function placeBet()
 {
     if (!document.getElementById("place-bet").classList.contains('disabled'))
         {
+            var val = Number(document.getElementById("bet-amnt").innerText);
+            wagerAmount = val || 0;
+            if (wagerAmount < 0) {
+                alert("Invalid bet amount!");
+                return;
+            }
+            if (!player.hasEnough(wagerAmount)) {
+                alert("Insufficient balance to place this bet!");
+                return;
+            }
+            playerBalanceBeforeStart = player.getBalance();
+            player.removeCurrency(wagerAmount);
             toggleBetContainer(false);
-            allowGame();
+            startGame();
         }
 }
 
@@ -58,10 +70,7 @@ function toggleBetContainer(to) {
     else container.classList.remove("disabled");
 }
 
-function allowGame()
-{
 
-}
 
 function buildDeck() {
     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -156,16 +165,18 @@ function stay() {
     }
     else if (yourSum > dealerSum) {
         message = "You Win!";
+        player.addCurrency(wagerAmount * 2);
     }
     else if (yourSum < dealerSum) {
         message = "You Lose!";
     }
-
+    profit = player.getBalance() - playerBalanceBeforeStart;
+    player.addToGameHistory("Blackjack", wagerAmount, profit)
     document.getElementById("dealer-sum").innerText = dealerSum;
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("results").innerText = message;
 
-    toggleBetContainer(true);
+    toggleBetContainer(false);
 }
 
 function getValue(card) {
