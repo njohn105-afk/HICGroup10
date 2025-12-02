@@ -215,8 +215,7 @@ body {
 .profile-content {
     flex: 1;
     background: #242424;
-    border-radius: 10px;
-    padding: 20px;
+    padding: 5px;
 }
 
 .history-table {
@@ -225,8 +224,6 @@ body {
     margin-top: 0px;
 
     background: #2f2f2f;
-    border: 1px solid #b38cff;
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -236,13 +233,14 @@ body {
 
 .history-table th {
     padding: 12px;
-    text-align: left;
+    text-align: center;
     font-size: 16px;
 }
 
 .history-table td {
+  text-align: center;
     padding: 12px;
-    font-size: 15px;
+    font-size: 14.5px;
     color: #e5e5e5;
 }
 
@@ -679,6 +677,9 @@ main {
   color: var(--text-muted);
   max-width: 30rem;
   margin-bottom: 1.4rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-alert {
@@ -705,6 +706,7 @@ main {
   flex-wrap: wrap;
   gap: 0.7rem;
   margin-bottom: 0.85rem;
+  justify-content: center;
 }
 
 .btn {
@@ -764,11 +766,11 @@ main {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .games-title {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 550;
 }
 
@@ -806,12 +808,18 @@ main {
   border-radius: var(--radius-md);
   padding: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.04);
+  text-decoration: none;
   position: relative;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast),
     border-color var(--transition-fast), background var(--transition-fast);
   cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .game-card::before {
@@ -848,7 +856,7 @@ main {
 }
 
 .game-icon {
-  font-size: 2.1rem;
+  font-size: 3.5rem;
   opacity: 0.94;
 }
 
