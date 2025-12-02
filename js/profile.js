@@ -1,8 +1,36 @@
 
 let activeProfileTab = null;
 
+/* 
+<!-- Default content (Profile page content goes here) -->
+            <h2 class="profile-title">Welcome, Guest!</h2>
+
+            <div class="profile-main-box">
+
+              <div class="profile-photo-box">
+                  <img src="img/profile-circle-svgrepo-com.svg" class="profile-img-large default-img">
+
+                <form method="POST" enctype="multipart/form-data" class="upload-form">
+                  {% csrf_token %}
+                  <input type="file" name="profile_image" class="upload-input">
+                  <button type="submit" class="upload-btn">Update Photo</button>
+                </form>
+              </div>
+
+              <div class="profile-info-box">
+                <h3 class="profile-section-title">Account Details</h3>
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+              </div>
+
+            </div>
+
+*/
+
+
+
 function loadHistory() {
-    const container = document.getElementById("history-content");
+    const container = document.getElementById("profile-content");
     container.innerHTML = ""; 
     const history = player.getGameHistory();
 
@@ -44,28 +72,69 @@ function loadHistory() {
     container.innerHTML = html;
 }
 
+function loadProfile() {
+    const container = document.getElementById("profile-content");
+    container.innerHTML = ""; 
+
+    const totalWager = player.totalWager;
+    const gamesPlayed = player.gamesPlayed;
+    const gamesWon = player.gamesWon;
+    const winRate = player.getWinRate();
+
+    container.innerHTML = `
+        <h2 class="profile-title">Welcome, Guest!</h2>
+
+        <div class="profile-main-box">
+
+            <div class="profile-photo-box">
+                  <img src="img/profile-circle-svgrepo-com.svg" class="profile-img-large default-img">
+
+                <form method="POST" enctype="multipart/form-data" class="upload-form">
+                  <input type="file" name="profile_image" class="upload-input">
+                  <button type="submit" class="upload-btn">Update Photo</button>
+                </form>
+              </div>
+
+            <div class="profile-info-box">
+                <h3 class="profile-section-title">Account Details</h3>
+                <p><strong>Username:</strong> Guest</p>
+                <p><strong>Games Played:</strong> ${gamesPlayed}</p>
+                <p><strong>Total Wager:</strong> ${totalWager}</p>
+                <p><strong>Games Won:</strong> ${gamesWon}</p>
+                <p><strong>Win Rate:</strong> ${winRate.toFixed(2)}%</p>
+            </div>
+
+            
+
+        </div>
+    `;
+}
 
 function loadSection(section) {
     if (section === "History") {
         loadHistory();
+    } else if (section === "Profile") {
+        loadProfile();
+    } else if (section === "Log Out") {
+        window.location.href = "index.html";
     }
 }
 
 window.onload = function () {
+    loadProfile(); // load profile on default
+
     document.querySelectorAll('.profile-tab').forEach(btn => {
         if (btn.classList.contains('active')) activeProfileTab = btn;
+
         btn.addEventListener('click', () => {
             if (activeProfileTab) {
-                console.log(activeProfileTab);
                 activeProfileTab.classList.remove('active');
-                activeProfileTab = btn;
-                activeProfileTab.classList.add('active');
-                console.log(activeProfileTab);
             }
 
-            const container = document.getElementById("history-content");
-            container.innerHTML = ""; 
-            loadSection(btn.textContent);
+            activeProfileTab = btn;
+            activeProfileTab.classList.add('active');
+
+            loadSection(btn.textContent.trim());
         });
     });
-}
+};

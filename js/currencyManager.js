@@ -16,6 +16,11 @@
 class Player {
     constructor() {
         this.balance = Number(localStorage.getItem("balance") ?? 1000);
+        this.totalWager = Number(localStorage.getItem("totalWager") ?? 0);
+        this.gamesPlayed = Number(localStorage.getItem("gamesPlayed") ?? 0);
+        this.gamesWon = Number(localStorage.getItem("gamesWon") ?? 0);
+        this.winRate = this.getWinRate();
+
         this.gameHistory = this.getGameHistory() ?? [];
         this.updateBalanceBox();
 
@@ -29,6 +34,11 @@ class Player {
 
     getBalance() {
         return this.balance ?? 0;
+    }
+
+    getWinRate() {
+        if (this.gamesPlayed === 0) return 0; 
+        return (this.gamesWon / this.gamesPlayed) * 100;
     }
 
     hasEnough(amount) {
@@ -74,12 +84,20 @@ class Player {
         if (this.gameHistory.length > 12) {
             this.gameHistory.splice(12); 
         }
+
+        this.totalWager += wagerAmt;
+        this.gamesPlayed += 1;
+        if (profitValue > 0) this.gamesWon += 1;
+
         this.saveGameHistory();
 
     }
 
     saveGameHistory() {
         localStorage.setItem("history", JSON.stringify(this.gameHistory));
+        localStorage.setItem("totalWager", this.totalWager);
+        localStorage.setItem("gamesPlayed", this.gamesPlayed);
+        localStorage.setItem("gamesWon", this.gamesWon);
     }
 
     updateBalanceBox() {
